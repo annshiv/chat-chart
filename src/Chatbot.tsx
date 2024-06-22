@@ -1,16 +1,21 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./App.css";
+import React, { useEffect, useRef, useState } from 'react';
+import './App.css';
 
 interface Message {
   user: boolean;
   text: string;
 }
 
-const Chatbot = () => {
-  const [message, setMessage] = useState("");
-  const [chatMessages, setChatMessages] = useState<Message[]>([
-    { user: false, text: "Hi, how can I help you today?" },
-  ]);
+interface IChatBot {
+  showChart: boolean;
+  setShowChart: (value: boolean) => void;
+}
+
+const Chatbot = (props: IChatBot) => {
+  const { showChart, setShowChart } = props;
+  const [message, setMessage] = useState('');
+  const [chatMessages, setChatMessages] = useState<Message[]>([{ user: false, text: '' }]);
+  const [firstMessageSent, setFirstMessageSent] = useState(false);
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -23,24 +28,15 @@ const Chatbot = () => {
     const newUserMessage: Message = { user: true, text: message };
     const aiResponse: Message = { user: false, text: "I don't know" };
 
-    // Add both user's message and AI's response together
     setChatMessages([...chatMessages, newUserMessage, aiResponse]);
-    setMessage("");
+    setMessage('');
+
+    if (!firstMessageSent) {
+      setShowChart(true);
+      setFirstMessageSent(true);
+    }
   };
 
-  useEffect(() => {
-    // Load chat messages from external source or API
-    // For demonstration, I'll simulate loading messages after 1 second
-    const timer = setTimeout(() => {
-      setChatMessages([
-        { user: false, text: "Hi, how can I help you today?" },
-      ]);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []); // Empty dependency array to run only once on component mount
-
-  // Scroll to the bottom of the chat container
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
@@ -49,12 +45,8 @@ const Chatbot = () => {
 
   return (
     <div className="chatbot">
-      <div className="chatbot-box">
+      <div className="chatbot-box" style={{ width: showChart ? '100%' : '550px', maxWidth:  showChart ? '350px' : "550px", height: showChart ? '85%' : "25%" }}>
         {/* Heading */}
-            {/* <div>
-      <h1>Current Template: {template}</h1>
-      <button onClick={changeTemplate}>Change Template</button>
-    </div> */}
         <div className="flex flex-col space-y-1.5 pb-6">
           <h2 className="font-semibold text-lg tracking-tight">Chatbot</h2>
         </div>
@@ -63,57 +55,53 @@ const Chatbot = () => {
         <div
           className="message-div pr-4 h-[474px] overflow-y-scroll"
           ref={chatContainerRef}
-          style={{ minWidth: "100%" }}
-        >
-          {chatMessages.map((msg, index) => (
-            <div
-              key={index}
-              className={`flex gap-3 my-4 text-gray-600 text-sm flex-1 ${
-                msg.user ? "justify-end" : "justify-start"
-              }`}
-            >
-              {!msg.user && (
-                <span className="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
-                  <div className="rounded-full bg-gray-100 border p-1">
-                    <svg
-                      stroke="none"
-                      fill="black"
-                      strokeWidth="1.5"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                      height="20"
-                      width="20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
-                      />
-                    </svg>
-                  </div>
-                </span>
-              )}
-              <p className="leading-relaxed">
-                <span
-                  className={`block font-bold ${
-                    msg.user ? "text-gray-700" : "text-gray-400"
-                  }`}
-                >
-                  {msg.user ? "You" : "AI"}
-                </span>
-                {msg.text}
-              </p>
-            </div>
-          ))}
+          style={{ minWidth: '100%', height: showChart ? '520px': '10px' }}>
+          {chatMessages.map(
+            (msg, index) =>
+              msg.text !== '' && (
+                <div
+                  key={index}
+                  className={`flex gap-3 my-4 text-gray-600 text-sm flex-1 ${
+                    msg.user ? 'justify-end' : 'justify-start'
+                  }`}>
+                  {!msg.user && (
+                    <span className="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
+                      <div className="rounded-full bg-gray-100 border p-1">
+                        <svg
+                          stroke="none"
+                          fill="black"
+                          strokeWidth="1.5"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                          height="20"
+                          width="20"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"
+                          />
+                        </svg>
+                      </div>
+                    </span>
+                  )}
+                  <p className="leading-relaxed">
+                    <span
+                      className={`block font-bold ${msg.user ? 'text-gray-700' : 'text-gray-400'}`}>
+                      {msg.user ? 'You' : 'AI'}
+                    </span>
+                    {msg.text}
+                  </p>
+                </div>
+              )
+          )}
         </div>
 
         {/* Input Box */}
         <div className="flex items-center pt-0">
           <form
             className="flex items-center justify-center w-full space-x-2"
-            onSubmit={handleSubmit}
-          >
+            onSubmit={handleSubmit}>
             <input
               className="flex h-10 w-full rounded-md border border-[#e5e7eb] px-3 py-2 text-sm placeholder-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#9ca3af] disabled:cursor-not-allowed disabled:opacity-50 text-[#030712] focus-visible:ring-offset-2"
               placeholder="Type your message"
@@ -122,8 +110,7 @@ const Chatbot = () => {
             />
             <button
               className="inline-flex items-center justify-center rounded-md text-sm font-medium text-[#f9fafb] disabled:pointer-events-none disabled:opacity-50 bg-black hover:bg-[#111827E6] h-10 px-4 py-2"
-              type="submit"
-            >
+              type="submit">
               Send
             </button>
           </form>
