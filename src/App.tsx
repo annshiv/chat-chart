@@ -15,9 +15,14 @@ const App: React.FC = () => {
     margin: 'auto'
   };
 
-  const chatbotContainerStyle = {
-    marginLeft: showChart ? 'auto' : '0px'
-  };
+  const chatbotContainerStyle = showChart
+    ? {}
+    : {
+        margin: 'auto',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      };
 
   return (
     <div className="component" style={showChart ? {} : containerStyle}>

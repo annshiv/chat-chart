@@ -87,7 +87,7 @@ const Chatbot = (props: IChatBot) => {
           <div>
             <h2 className="font-semibold text-lg tracking-tight">Chatbot</h2>
           </div>
-          <div className="icons flex space-x-2" style={{ width: showChart ? '50%' : '30%' }}>
+          <div className="icons flex space-x-2" style={{ width: showChart ? '' : '30%' }}>
             <div className="icon-chart">
               <div
                 className={`icon ${selectedIcon === 'bar' ? 'selected' : ''}`}
