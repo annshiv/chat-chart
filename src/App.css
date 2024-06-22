@@ -6,10 +6,14 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-color: #e5e7eb;
 }
 
 .chatbot-box {
-  box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  box-shadow:
+    0 0 #0000,
+    0 0 #0000,
+    0 1px 2px 0 rgb(0 0 0 / 0.05);
   background-color: white;
   padding: 1.5rem;
   border-radius: 0.5rem;
@@ -54,6 +58,8 @@ body {
 .message-div::-webkit-scrollbar {
   width: 0;
   height: 0;
+  width: 0;
+  height: 0;
 }
 
 .message-div::-webkit-scrollbar-thumb {
@@ -66,9 +72,43 @@ body {
   margin: 1rem;
 }
 
+.box {
+  border: groove;
+  border-radius: 10px;
+  border-color: #e5e7eb;
+  box-shadow:
+    0 0 #0000,
+    0 0 #0000,
+    0 1px 2px 0 rgb(0 0 0 / 0.05);
+  border-width: thin;
+  width: 70%;
+  height: 100vh;
+  margin: 1.5rem;
+  background-color: white;
+}
+
+.chart-holder {
+  border: groove;
+  border-width: thin;
+  height: 50%;
+  width: 95%;
+  margin-top: 20%;
+  margin-left: 2.5%;
+  border-color: #e5e7eb;
+  box-shadow:
+    0 0 #0000,
+    0 0 #0000,
+    0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
 p {
   max-width: 70%;
   word-wrap: break-word;
+}
+
+.chart-name {
+  align-items: center;
+  padding: 10px;
 }
 
 /* Mobile view styles */
@@ -115,7 +155,6 @@ p {
     margin: 5%;
     max-width: 380px;
   }
-
 }
 
 @media (max-width: 450px) {
@@ -126,7 +165,6 @@ p {
   .chatbot-box {
     margin: 0;
   }
-
 }
 
 /* Laptop view styles */
@@ -136,15 +174,10 @@ p {
     margin: 1.5rem 1rem;
   }
 
-  .box {
-    width: 70%;
-  }
-
   .chatbot-container {
     width: 30%;
     position: relative;
     top: 0;
     right: 0;
   }
-
 }

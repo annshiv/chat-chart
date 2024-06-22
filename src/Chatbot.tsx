@@ -45,7 +45,7 @@ const Chatbot = (props: IChatBot) => {
     setChatMessages(initialChatMessage);
     setMessage('');
   };
-  
+
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
@@ -67,79 +67,74 @@ const Chatbot = (props: IChatBot) => {
             <h2 className="font-semibold text-lg tracking-tight">Chatbot</h2>
           </div>
           <div className="icons flex space-x-2">
-          <div className='icon-chart'>
-            <div
-              className={`icon ${selectedIcon === 'bar' ? 'selected' : ''}`}
-              onClick={() => setSelectedIcon('bar')}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M6 20c1.1 0 2-.9 2-2v-7c0-1.1-.9-2-2-2s-2 .9-2 2v7c0 1.1.9 2 2 2m10-5v3c0 1.1.9 2 2 2s2-.9 2-2v-3c0-1.1-.9-2-2-2s-2 .9-2 2m-4 5c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2s-2 .9-2 2v12c0 1.1.9 2 2 2"
-                />
-              </svg>
+            <div className="icon-chart">
+              <div
+                className={`icon ${selectedIcon === 'bar' ? 'selected' : ''}`}
+                onClick={() => setSelectedIcon('bar')}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M6 20c1.1 0 2-.9 2-2v-7c0-1.1-.9-2-2-2s-2 .9-2 2v7c0 1.1.9 2 2 2m10-5v3c0 1.1.9 2 2 2s2-.9 2-2v-3c0-1.1-.9-2-2-2s-2 .9-2 2m-4 5c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2s-2 .9-2 2v12c0 1.1.9 2 2 2"
+                  />
+                </svg>
+              </div>
+              <div
+                className={`icon ${selectedIcon === 'line' ? 'selected' : ''}`}
+                onClick={() => setSelectedIcon('line')}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2">
+                    <path d="M3 3v18h18" />
+                    <path d="m19 9l-5 5l-4-4l-3 3" />
+                  </g>
+                </svg>
+              </div>
+              <div
+                className={`icon ${selectedIcon === 'lollipop' ? 'selected' : ''}`}
+                onClick={() => setSelectedIcon('lollipop')}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 64 64"
+                  width="18"
+                  height="18"
+                  fill="currentColor">
+                  <line x1="12" y1="20" x2="12" y2="50" stroke="black" strokeWidth="2" />
+                  <line x1="32" y1="30" x2="32" y2="50" stroke="black" strokeWidth="2" />
+                  <line x1="52" y1="10" x2="52" y2="50" stroke="black" strokeWidth="2" />
+
+                  <circle cx="12" cy="20" r="6" fill="black" />
+                  <circle cx="32" cy="30" r="6" fill="black" />
+                  <circle cx="52" cy="10" r="6" fill="black" />
+
+                  <line x1="0" y1="50" x2="64" y2="50" stroke="black" strokeWidth="2" />
+                </svg>
+              </div>
             </div>
-            <div
-              className={`icon ${selectedIcon === 'line' ? 'selected' : ''}`}
-              onClick={() => setSelectedIcon('line')}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+            <button className="reset-icon" onClick={() => onReset()}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 21 21">
                 <g
                   fill="none"
+                  fillRule="evenodd"
                   stroke="currentColor"
                   strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2">
-                  <path d="M3 3v18h18" />
-                  <path d="m19 9l-5 5l-4-4l-3 3" />
+                  strokeLinejoin="round">
+                  <path d="M3.578 6.487A8 8 0 1 1 2.5 10.5"></path>
+                  <path d="M7.5 6.5h-4v-4"></path>
                 </g>
               </svg>
-            </div>
-            <div
-              className={`icon ${selectedIcon === 'lollipop' ? 'selected' : ''}`}
-              onClick={() => setSelectedIcon('lollipop')}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 64 64"
-                width="18"
-                height="18"
-                fill="currentColor">
-                <line x1="12" y1="20" x2="12" y2="50" stroke="black" strokeWidth="2" />
-                <line x1="32" y1="30" x2="32" y2="50" stroke="black" strokeWidth="2" />
-                <line x1="52" y1="10" x2="52" y2="50" stroke="black" strokeWidth="2" />
-
-                <circle cx="12" cy="20" r="6" fill="black" />
-                <circle cx="32" cy="30" r="6" fill="black" />
-                <circle cx="52" cy="10" r="6" fill="black" />
-
-                <line x1="0" y1="50" x2="64" y2="50" stroke="black" strokeWidth="2" />
-              </svg>
-            </div>
-            </div>
-            <button className='reset-icon' onClick={() => onReset()}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 21 21">
-              <g
-                fill="none"
-                fillRule="evenodd"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round">
-                <path d="M3.578 6.487A8 8 0 1 1 2.5 10.5"></path>
-                <path d="M7.5 6.5h-4v-4"></path>
-              </g>
-            </svg>
-          </button>
+            </button>
           </div>
-          
         </div>
 
         {/* Chat Container */}
         <div
           className="message-div pr-4 h-[474px] overflow-y-scroll"
           ref={chatContainerRef}
-          style={{ minWidth: '100%', height: showChart ? '520px': '10px' }}>
+          style={{ minWidth: '100%', height: showChart ? '520px' : '10px' }}>
           {chatMessages.map(
             (msg, index) =>
               msg.text !== '' && (
@@ -201,7 +196,6 @@ const Chatbot = (props: IChatBot) => {
         </div>
       </div>
     </div>
-   
   );
 };
 
