@@ -26,6 +26,7 @@ const App: React.FC = () => {
           <div className="chart-holder">
             <h1 className="chart-name"> Chartbot-Chart</h1>
             <ChartRenderer />
+            {/* <BarChart data={sampleDataJson} /> */}
           </div>
           <div className=" side-panel chart-holder">
             <div className='close-icon'>
