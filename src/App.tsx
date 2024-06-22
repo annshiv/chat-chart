@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+
 import ChartRenderer from './ChartRenderer';
 import Chatbot from './Chatbot';
 import './index.css';
+import { connect } from 'react-redux';
+import { RootState } from './redux/store';
 
 const App: React.FC = () => {
   const [showChart, setShowChart] = useState(false);
@@ -50,4 +53,7 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+const mapState = (state: RootState) =>({
+  config: state.config
+})
+export default connect(mapState, null)(App);

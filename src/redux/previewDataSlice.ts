@@ -7,7 +7,7 @@ const previewDataSlice = createSlice({
   name: 'previewData',
   initialState,
   reducers: {
-    setConfig(state, action: PayloadAction<IState>) {
+    setPreviewDataConfig(state, action: PayloadAction<IState>) {
       state = action.payload;
     }
   }
@@ -17,7 +17,7 @@ const previewDataSlice = createSlice({
 const { actions, reducer } = previewDataSlice;
 
 // Export the actions
-export const { setConfig } = actions;
+export const { setPreviewDataConfig } = actions;
 
 // Export the reducer as default
 export default reducer;
