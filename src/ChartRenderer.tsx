@@ -1,4 +1,3 @@
-//import Loader from './Loader';
 import React from 'react';
 
 const ChartRenderer: React.FC = () => {
