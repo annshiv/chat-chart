@@ -7,15 +7,22 @@ export enum ETemplateId {
 
 export interface IState {
   template: ETemplateId;
-}
-
-export interface IPayload {
-  template: ETemplateId;
+  ranking: {
+    type: string;
+    count: number;
+  };
+  sorting: {
+    type: string;
+  };
 }
 
 // Define your initial state
 const initialState: IState = {
-  template: ETemplateId.BAR
+  template: ETemplateId.BAR,
+  ranking: { type: 'off', count: 0 },
+  sorting: {
+    type: 'off'
+  }
 };
 
 // Create a slice
@@ -23,8 +30,14 @@ const templateSlice = createSlice({
   name: 'template',
   initialState,
   reducers: {
-    setTemplate(state, action: PayloadAction<IPayload>) {
+    setTemplate(state, action: PayloadAction<{ template: ETemplateId }>) {
       state.template = action.payload.template;
+    },
+    setRanking(state, action: PayloadAction<{ type: string; count: number }>) {
+      state.ranking = action.payload;
+    },
+    setSorting(state, action: PayloadAction<{ type: string }>) {
+      state.sorting = action.payload;
     }
   }
 });
@@ -33,7 +46,7 @@ const templateSlice = createSlice({
 const { actions, reducer } = templateSlice;
 
 // Export the actions
-export const { setTemplate } = actions;
+export const { setTemplate, setRanking, setSorting } = actions;
 
 // Export the reducer as default
 export default reducer;
