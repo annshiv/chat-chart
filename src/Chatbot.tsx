@@ -58,15 +58,14 @@ const Chatbot = (props: IChatBot) => {
         className="chatbot-box"
         style={{
           width: showChart ? '100%' : '550px',
-          maxWidth: showChart ? '350px' : '550px',
-          height: showChart ? '85%' : '25%'
+          maxWidth: showChart ? '350px' : '550px'
         }}>
         {/* Heading */}
         <div className="icon-chart flex flex-col space-y-1.5 pb-6">
           <div>
             <h2 className="font-semibold text-lg tracking-tight">Chatbot</h2>
           </div>
-          <div className="icons flex space-x-2">
+          <div className="icons flex space-x-2" style={{ width: showChart ? '50%' : '30%' }}>
             <div className="icon-chart">
               <div
                 className={`icon ${selectedIcon === 'bar' ? 'selected' : ''}`}
@@ -134,7 +133,7 @@ const Chatbot = (props: IChatBot) => {
         <div
           className="message-div pr-4 h-[474px] overflow-y-scroll"
           ref={chatContainerRef}
-          style={{ minWidth: '100%', height: showChart ? '520px' : '10px' }}>
+          style={{ minWidth: '100%', height: showChart ? '34rem' : '10px' }}>
           {chatMessages.map(
             (msg, index) =>
               msg.text !== '' && (
