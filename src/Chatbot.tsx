@@ -1,8 +1,27 @@
+import React from 'react';
 import './index.css';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { RootState } from './redux/store';
+// import { setTemplate, ETemplateId } from './redux/templateSlice';
 
 const Chatbot = () => {
+
+  // const dispatch = useDispatch();
+  // const template = useSelector((state: RootState) => state.template.template);
+
+  // const changeTemplate = () => {
+  //   dispatch(setTemplate({ template: ETemplateId.LINE }));
+  // };
+  
   return (
     <div>
+      
+    {/* <div>
+      <h1>Current Template: {template}</h1>
+      <button onClick={changeTemplate}>Change Template</button>
+    </div> */}
+
+
       <button
         className="fixed bottom-4 right-4 inline-flex items-center justify-center text-sm font-medium disabled:pointer-events-none disabled:opacity-50 border rounded-full w-16 h-16 bg-black hover:bg-gray-700 m-0 cursor-pointer border-gray-200 bg-none p-0 normal-case leading-5 hover:text-gray-900"
         type="button"
@@ -117,7 +136,7 @@ const Chatbot = () => {
               </div>
             </span>
             <p className="leading-relaxed">
-              <span className="block font-bold text-gray-700">AI </span>Sorry, I couldn't find any information in the documentation about that. Expect answer to be less accurate. I could not find the answer to this in the verified sources.
+              <span className="block font-bold text-gray-700">AI </span>Sorry, I could not find any information in the documentation about that. Expect answer to be less accurate. I could not find the answer to this in the verified sources.
             </p>
           </div>
         </div>
