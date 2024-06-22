@@ -1,7 +1,7 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import React from 'react';
-import { getDataObj } from '../Utils/constant';
+import { getDataObj } from '../utils/constant';
 import { IProps } from './BarChart';
 
 export const LineChart: React.FC<IProps> = (props: IProps) => {

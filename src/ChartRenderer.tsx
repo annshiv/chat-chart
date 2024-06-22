@@ -5,7 +5,7 @@ import store from './redux/store';
 import { ETemplateId, IState } from './redux/templateSlice';
 import { applyRanking } from './Services/Ranking';
 import { applySorting } from './Services/Sorting';
-import { sampleDataJson } from './Utils/constant';
+import { sampleDataJson } from './utils/constant';
 
 const getData = (config?: IState) => {
   const { ranking, sorting } = config ?? store.getState().config;
