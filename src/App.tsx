@@ -1,11 +1,16 @@
-import React from 'react';
-import Chatbot from './Chatbot';
+import React from "react";
+import Chatbot from "./Chatbot";
+import './index.css';
 
 const App: React.FC = () => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">ChatBot</h1>
-      <Chatbot />
+    <div className="component">
+      <div className="box">
+        <h1>Chatbot-Chart</h1>
+      </div>
+      <div className="chatbot-container">
+        <Chatbot />
+      </div>
     </div>
   );
 };
