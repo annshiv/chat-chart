@@ -13,13 +13,12 @@ interface IChatBot {
 
 const initialChatMessage = [{ user: false, text: 'Hi, how can I help you today?' }];
 
-
-
 const Chatbot = (props: IChatBot) => {
   const { showChart, setShowChart } = props;
   const [message, setMessage] = useState('');
   const [chatMessages, setChatMessages] = useState<Message[]>([{ user: false, text: '' }]);
   const [firstMessageSent, setFirstMessageSent] = useState(false);
+  const [selectedIcon, setSelectedIcon] = useState('bar');
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -35,18 +34,18 @@ const Chatbot = (props: IChatBot) => {
     setChatMessages([...chatMessages, newUserMessage, aiResponse]);
     setMessage('');
 
-    const onReset = () => {
-      console.log('hitting');
-      setChatMessages(initialChatMessage);
-      setMessage('');
-    };
-
     if (!firstMessageSent) {
       setShowChart(true);
       setFirstMessageSent(true);
     }
   };
 
+  const onReset = () => {
+    console.log('hitting');
+    setChatMessages(initialChatMessage);
+    setMessage('');
+  };
+  
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
@@ -55,11 +54,67 @@ const Chatbot = (props: IChatBot) => {
 
   return (
     <div className="chatbot">
-      <div className="chatbot-box" style={{ width: showChart ? '100%' : '550px', maxWidth:  showChart ? '350px' : "550px", height: showChart ? '85%' : "25%" }}>
+      <div
+        className="chatbot-box"
+        style={{
+          width: showChart ? '100%' : '550px',
+          maxWidth: showChart ? '350px' : '550px',
+          height: showChart ? '85%' : '25%'
+        }}>
         {/* Heading */}
-        <div className="flex flex-col space-y-1.5 pb-6">
-          <h2 className="font-semibold text-lg tracking-tight">Chatbot</h2>
-          <button onClick={() => onReset()}>
+        <div className="icon-chart flex flex-col space-y-1.5 pb-6">
+          <div>
+            <h2 className="font-semibold text-lg tracking-tight">Chatbot</h2>
+          </div>
+          <div className="icons flex space-x-2">
+          <div className='icon-chart'>
+            <div
+              className={`icon ${selectedIcon === 'bar' ? 'selected' : ''}`}
+              onClick={() => setSelectedIcon('bar')}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M6 20c1.1 0 2-.9 2-2v-7c0-1.1-.9-2-2-2s-2 .9-2 2v7c0 1.1.9 2 2 2m10-5v3c0 1.1.9 2 2 2s2-.9 2-2v-3c0-1.1-.9-2-2-2s-2 .9-2 2m-4 5c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2s-2 .9-2 2v12c0 1.1.9 2 2 2"
+                />
+              </svg>
+            </div>
+            <div
+              className={`icon ${selectedIcon === 'line' ? 'selected' : ''}`}
+              onClick={() => setSelectedIcon('line')}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+                <g
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2">
+                  <path d="M3 3v18h18" />
+                  <path d="m19 9l-5 5l-4-4l-3 3" />
+                </g>
+              </svg>
+            </div>
+            <div
+              className={`icon ${selectedIcon === 'lollipop' ? 'selected' : ''}`}
+              onClick={() => setSelectedIcon('lollipop')}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 64 64"
+                width="18"
+                height="18"
+                fill="currentColor">
+                <line x1="12" y1="20" x2="12" y2="50" stroke="black" strokeWidth="2" />
+                <line x1="32" y1="30" x2="32" y2="50" stroke="black" strokeWidth="2" />
+                <line x1="52" y1="10" x2="52" y2="50" stroke="black" strokeWidth="2" />
+
+                <circle cx="12" cy="20" r="6" fill="black" />
+                <circle cx="32" cy="30" r="6" fill="black" />
+                <circle cx="52" cy="10" r="6" fill="black" />
+
+                <line x1="0" y1="50" x2="64" y2="50" stroke="black" strokeWidth="2" />
+              </svg>
+            </div>
+            </div>
+            <button className='reset-icon' onClick={() => onReset()}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="1em"
@@ -76,6 +131,8 @@ const Chatbot = (props: IChatBot) => {
               </g>
             </svg>
           </button>
+          </div>
+          
         </div>
 
         {/* Chat Container */}
@@ -144,6 +201,7 @@ const Chatbot = (props: IChatBot) => {
         </div>
       </div>
     </div>
+   
   );
 };
 

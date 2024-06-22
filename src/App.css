@@ -18,6 +18,31 @@ body {
   margin: 0 auto;
 }
 
+.icons {
+  display: flex;
+  width: 30%;
+  justify-content: space-around;
+}
+
+.icon-chart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.icon {
+  margin: 0 7%;
+}
+
+.reset-icon {
+  margin: 0 7% 0 45%;
+}
+
+.selected {
+  background: #c4c0c0;
+  padding: 2px;
+}
+
 .message-div {
   height: 520px;
   max-height: 520px;
@@ -27,8 +52,8 @@ body {
 
 /* Hide the scrollbar */
 .message-div::-webkit-scrollbar {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
 }
 
 .message-div::-webkit-scrollbar-thumb {
@@ -52,9 +77,11 @@ p {
     flex-direction: column-reverse;
     margin: 1.5rem 1rem;
   }
-  .message-div{
-    height:480px;
+
+  .message-div {
+    height: 480px;
   }
+
   .chatbot {
     display: flex;
     flex-direction: column;
