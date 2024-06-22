@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
-    "ajv": "^7.2.4"
+    "ajv": "^7.2.4",
+    "tailwindcss": "^3.4.4"
   }
 }
