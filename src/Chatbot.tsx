@@ -4,6 +4,7 @@ import './App.css';
 import { ETemplateId, initialState, setConfig, setTemplate } from './redux/templateSlice';
 import axios from 'axios';
 import store from './redux/store';
+import { setPreviewDataConfig } from './redux/previewDataSlice';
 
 interface Message {
   user: boolean;
@@ -49,6 +50,7 @@ const Chatbot = (props: IChatBot) => {
       config: store.getState().config,
       prompt: chatMessages
     };
+    
 
     setLoading(true)
     const res = (await axios.post('http://localhost:8080/get-config', payload)) as IResponse;
@@ -59,7 +61,7 @@ const Chatbot = (props: IChatBot) => {
       setChatMessages([...chatMessages, newUserMessage, aiResponse]);
       setMessage('');
       if (!firstMessageSent) {
-        setConfig(parsedResponse)
+        dispatch(setPreviewDataConfig(parsedResponse))
         setShowChart(true);
         setFirstMessageSent(true);
       }

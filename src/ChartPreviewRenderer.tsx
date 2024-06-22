@@ -1,11 +1,12 @@
 import React from 'react';
 import { BarChart } from './Chart container/BarChart';
 import { LineChart } from './Chart container/LineChart';
-import store from './redux/store';
+import store, { RootState } from './redux/store';
 import { ETemplateId, IState } from './redux/templateSlice';
 import { applyRanking } from './Services/Ranking';
 import { applySorting } from './Services/Sorting';
 import { sampleDataJson } from './Utils/constant';
+import {  connect } from 'react-redux';
 
 const getData = (config?: IState) => {
   const { ranking, sorting } = config ?? store.getState().config;
@@ -19,15 +20,18 @@ const getData = (config?: IState) => {
   return data;
 };
 
-const ChartPreviewRenderer: React.FC = () => {
-  const { template } = store.getState().config;
+const ChartPreviewRenderer: React.FC = (props:TMapState ) => {
+  const { previewData }= props
+  if(!previewData) return null
+  const { template } = previewData
+
   let chart = null;
   switch (template) {
     case ETemplateId.BAR:
-      chart = <BarChart data={getData()} />;
+      chart = <BarChart data={getData(previewData)} />;
       break;
     case ETemplateId.LINE:
-      chart = <LineChart data={getData()} />;
+      chart = <LineChart data={getData(previewData)} />;
       break;
     default:
       null;
@@ -50,4 +54,11 @@ const ChartPreviewRenderer: React.FC = () => {
     </div>
   );
 };
-export default ChartPreviewRenderer;
+
+type TMapState = Partial<ReturnType<typeof mapState>>
+
+const mapState = (state: RootState) => ({
+  previewData: state.previewData
+})
+
+export default connect(mapState, null)(ChartPreviewRenderer);
