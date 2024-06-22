@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
+import axios from 'axios';
+import store from './redux/store';
 
 interface Message {
   user: boolean;
@@ -9,6 +11,13 @@ interface Message {
 interface IChatBot {
   showChart: boolean;
   setShowChart: (value: boolean) => void;
+}
+
+interface IResponse {
+ data: {
+  config: string
+ }
+ status: number
 }
 
 const initialChatMessage = [{ user: false, text: 'Hi, how can I help you today?' }];
@@ -26,17 +35,30 @@ const Chatbot = (props: IChatBot) => {
     setMessage(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newUserMessage: Message = { user: true, text: message };
     const aiResponse: Message = { user: false, text: "I don't know" };
 
-    setChatMessages([...chatMessages, newUserMessage, aiResponse]);
-    setMessage('');
+    
 
-    if (!firstMessageSent) {
-      setShowChart(true);
-      setFirstMessageSent(true);
+    const payload = {
+      type: showChart ? 'update' : 'create',
+      config: store.getState(),
+      prompt: chatMessages
+    };
+
+    const res = await axios.post('http://localhost:8080/get-config', payload) as IResponse
+    console.log('the res is here',res)
+    const parsedResponse = JSON.parse(res.data.config)
+    console.log('parsed response', parsedResponse)
+    if(res.status === 200){
+      setChatMessages([...chatMessages, newUserMessage, aiResponse]);
+    setMessage('');
+      if (!firstMessageSent) {
+        setShowChart(true);
+        setFirstMessageSent(true);
+      }
     }
   };
 
