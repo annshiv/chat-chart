@@ -5,9 +5,9 @@ export interface IRanking {
 
   count: number;
 }
-export const ranking = (data: IDataFormat[], rankingConfig: IRanking) => {
+export const applyRanking = (data: IDataFormat[], rankingConfig: IRanking) => {
   const { count } = rankingConfig;
-  let rankedRows = [];
+  let rankedRows: IDataFormat[] = [];
   switch (rankingConfig.type) {
     case 'top':
       {
@@ -47,7 +47,7 @@ export const ranking = (data: IDataFormat[], rankingConfig: IRanking) => {
       break;
     case 'off':
     default:
-      rankedRows = [data, []];
+      rankedRows = [...data];
       break;
   }
   return rankedRows;
