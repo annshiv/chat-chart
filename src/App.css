@@ -26,6 +26,7 @@ body {
   height: 520px;
   max-height: 520px;
   overflow-y: scroll;
+  padding-right: 0rem !important;
 }
 
 /* Hide the scrollbar */
