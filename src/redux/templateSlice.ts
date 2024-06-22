@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IRanking } from '../Services/Ranking';
+import { ISorting } from '../Services/Sorting';
 
 export enum ETemplateId {
   BAR = 'BAR',
@@ -7,21 +9,16 @@ export enum ETemplateId {
 
 export interface IState {
   template: ETemplateId;
-  ranking: {
-    type: string;
-    count: number;
-  };
-  sorting: {
-    type: string;
-  };
+  ranking: IRanking;
+  sorting: ISorting;
 }
 
 // Define your initial state
 const initialState: IState = {
-  template: ETemplateId.BAR,
-  ranking: { type: 'off', count: 0 },
+  template: ETemplateId.LINE,
+  ranking: { type: 'top', count: 2 },
   sorting: {
-    type: 'off'
+    type: 'ascending'
   }
 };
 
@@ -30,13 +27,16 @@ const templateSlice = createSlice({
   name: 'template',
   initialState,
   reducers: {
+    setConfig(state, action: PayloadAction<IState>) {
+      state = action.payload;
+    },
     setTemplate(state, action: PayloadAction<{ template: ETemplateId }>) {
       state.template = action.payload.template;
     },
-    setRanking(state, action: PayloadAction<{ type: string; count: number }>) {
+    setRanking(state, action: PayloadAction<IRanking>) {
       state.ranking = action.payload;
     },
-    setSorting(state, action: PayloadAction<{ type: string }>) {
+    setSorting(state, action: PayloadAction<ISorting>) {
       state.sorting = action.payload;
     }
   }

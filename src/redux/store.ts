@@ -3,7 +3,7 @@ import templateReducer from './templateSlice';
 
 const store = configureStore({
   reducer: {
-    template: templateReducer
+    config: templateReducer
   }
 });
 

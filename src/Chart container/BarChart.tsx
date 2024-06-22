@@ -6,7 +6,7 @@ export interface IProps {
   data: IDataFormat[];
 }
 export const BarChart: React.FC<IProps> = (props: IProps) => {
-  const { categories, value1, value2 } = getDataObj(props.data);
+  const { categories, value1 } = getDataObj(props.data);
   const config = {
     chart: {
       type: 'column'
@@ -45,11 +45,11 @@ export const BarChart: React.FC<IProps> = (props: IProps) => {
       {
         name: 'Corn',
         data: value1
-      },
-      {
-        name: 'Wheat',
-        data: value2
       }
+      // {
+      //   name: 'Wheat',
+      //   data: value2
+      // }
     ]
   };
   return (

@@ -4,7 +4,7 @@ type TSortType = 'ascending' | 'descending' | 'off';
 export interface ISorting {
   type: TSortType;
 }
-export const sorting = (data: IDataFormat[], sortingConfig: ISorting) => {
+export const applySorting = (data: IDataFormat[], sortingConfig: ISorting) => {
   let sortedRows = [];
   switch (sortingConfig.type) {
     case 'ascending':
@@ -23,7 +23,7 @@ export const sorting = (data: IDataFormat[], sortingConfig: ISorting) => {
       break;
     case 'off':
     default:
-      sortedRows = [data, []];
+      sortedRows = [...data];
       break;
   }
   return sortedRows;
