@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import './App.css';
+import { ETemplateId, initialState, setConfig, setTemplate } from './redux/templateSlice';
 
 interface Message {
   user: boolean;
@@ -21,6 +23,7 @@ const Chatbot = (props: IChatBot) => {
   const [selectedIcon, setSelectedIcon] = useState('bar');
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
@@ -40,10 +43,16 @@ const Chatbot = (props: IChatBot) => {
     }
   };
 
+  const onChartUpdate = (value: ETemplateId) => {
+    setSelectedIcon(value);
+    dispatch(setTemplate({ template: value }));
+  };
+
   const onReset = () => {
     console.log('hitting');
     setChatMessages(initialChatMessage);
     setMessage('');
+    dispatch(setConfig(initialState));
   };
 
   useEffect(() => {
@@ -68,8 +77,8 @@ const Chatbot = (props: IChatBot) => {
           <div className="icons flex space-x-2" style={{ width: showChart ? '50%' : '30%' }}>
             <div className="icon-chart">
               <div
-                className={`icon ${selectedIcon === 'bar' ? 'selected' : ''}`}
-                onClick={() => setSelectedIcon('bar')}>
+                className={`icon ${selectedIcon === ETemplateId.BAR ? 'selected' : ''}`}
+                onClick={() => onChartUpdate(ETemplateId.BAR)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                   <path
                     fill="currentColor"
@@ -79,7 +88,7 @@ const Chatbot = (props: IChatBot) => {
               </div>
               <div
                 className={`icon ${selectedIcon === 'line' ? 'selected' : ''}`}
-                onClick={() => setSelectedIcon('line')}>
+                onClick={() => onChartUpdate(ETemplateId.LINE)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                   <g
                     fill="none"
@@ -93,8 +102,8 @@ const Chatbot = (props: IChatBot) => {
                 </svg>
               </div>
               <div
-                className={`icon ${selectedIcon === 'lollipop' ? 'selected' : ''}`}
-                onClick={() => setSelectedIcon('lollipop')}>
+                className={`icon ${selectedIcon === ETemplateId.BAR ? 'selected' : ''}`}
+                onClick={() => onChartUpdate(ETemplateId.BAR)}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 64 64"
