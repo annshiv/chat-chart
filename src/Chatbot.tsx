@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './App.css';
 import { ETemplateId, initialState, setConfig, setTemplate } from './redux/templateSlice';
+import axios from 'axios';
+import store from './redux/store';
 
 interface Message {
   user: boolean;
@@ -11,6 +13,13 @@ interface Message {
 interface IChatBot {
   showChart: boolean;
   setShowChart: (value: boolean) => void;
+}
+
+interface IResponse {
+  data: {
+    config: string;
+  };
+  status: number;
 }
 
 const initialChatMessage = [{ user: false, text: 'Hi, how can I help you today?' }];
@@ -29,17 +38,28 @@ const Chatbot = (props: IChatBot) => {
     setMessage(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newUserMessage: Message = { user: true, text: message };
     const aiResponse: Message = { user: false, text: "I don't know" };
 
-    setChatMessages([...chatMessages, newUserMessage, aiResponse]);
-    setMessage('');
+    const payload = {
+      type: showChart ? 'update' : 'create',
+      config: store.getState(),
+      prompt: chatMessages
+    };
 
-    if (!firstMessageSent) {
-      setShowChart(true);
-      setFirstMessageSent(true);
+    const res = (await axios.post('http://localhost:8080/get-config', payload)) as IResponse;
+    console.log('the res is here', res);
+    const parsedResponse = JSON.parse(res.data.config);
+    console.log('parsed response', parsedResponse);
+    if (res.status === 200) {
+      setChatMessages([...chatMessages, newUserMessage, aiResponse]);
+      setMessage('');
+      if (!firstMessageSent) {
+        setShowChart(true);
+        setFirstMessageSent(true);
+      }
     }
   };
 
@@ -99,26 +119,6 @@ const Chatbot = (props: IChatBot) => {
                     <path d="M3 3v18h18" />
                     <path d="m19 9l-5 5l-4-4l-3 3" />
                   </g>
-                </svg>
-              </div>
-              <div
-                className={`icon ${selectedIcon === ETemplateId.BAR ? 'selected' : ''}`}
-                onClick={() => onChartUpdate(ETemplateId.BAR)}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 64 64"
-                  width="18"
-                  height="18"
-                  fill="currentColor">
-                  <line x1="12" y1="20" x2="12" y2="50" stroke="black" strokeWidth="2" />
-                  <line x1="32" y1="30" x2="32" y2="50" stroke="black" strokeWidth="2" />
-                  <line x1="52" y1="10" x2="52" y2="50" stroke="black" strokeWidth="2" />
-
-                  <circle cx="12" cy="20" r="6" fill="black" />
-                  <circle cx="32" cy="30" r="6" fill="black" />
-                  <circle cx="52" cy="10" r="6" fill="black" />
-
-                  <line x1="0" y1="50" x2="64" y2="50" stroke="black" strokeWidth="2" />
                 </svg>
               </div>
             </div>
