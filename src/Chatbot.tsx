@@ -1,16 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./App.css";
+import React, { useEffect, useRef, useState } from 'react';
+import './App.css';
 
 interface Message {
   user: boolean;
   text: string;
 }
 
+const initialChatMessage = [{ user: false, text: 'Hi, how can I help you today?' }];
+
 const Chatbot = () => {
-  const [message, setMessage] = useState("");
-  const [chatMessages, setChatMessages] = useState<Message[]>([
-    { user: false, text: "Hi, how can I help you today?" },
-  ]);
+  const [message, setMessage] = useState('');
+  const [chatMessages, setChatMessages] = useState<Message[]>(initialChatMessage);
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -25,16 +25,20 @@ const Chatbot = () => {
 
     // Add both user's message and AI's response together
     setChatMessages([...chatMessages, newUserMessage, aiResponse]);
-    setMessage("");
+    setMessage('');
+  };
+
+  const onReset = () => {
+    console.log('hitting');
+    setChatMessages(initialChatMessage);
+    setMessage('');
   };
 
   useEffect(() => {
     // Load chat messages from external source or API
     // For demonstration, I'll simulate loading messages after 1 second
     const timer = setTimeout(() => {
-      setChatMessages([
-        { user: false, text: "Hi, how can I help you today?" },
-      ]);
+      setChatMessages([{ user: false, text: 'Hi, how can I help you today?' }]);
     }, 1000);
 
     return () => clearTimeout(timer);
@@ -51,27 +55,42 @@ const Chatbot = () => {
     <div className="chatbot">
       <div className="chatbot-box">
         {/* Heading */}
-            {/* <div>
+        {/* <div>
       <h1>Current Template: {template}</h1>
       <button onClick={changeTemplate}>Change Template</button>
     </div> */}
         <div className="flex flex-col space-y-1.5 pb-6">
           <h2 className="font-semibold text-lg tracking-tight">Chatbot</h2>
+          <button onClick={() => onReset()}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 21 21">
+              <g
+                fill="none"
+                fillRule="evenodd"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round">
+                <path d="M3.578 6.487A8 8 0 1 1 2.5 10.5"></path>
+                <path d="M7.5 6.5h-4v-4"></path>
+              </g>
+            </svg>
+          </button>
         </div>
 
         {/* Chat Container */}
         <div
           className="message-div pr-4 h-[474px] overflow-y-scroll"
           ref={chatContainerRef}
-          style={{ minWidth: "100%" }}
-        >
+          style={{ minWidth: '100%' }}>
           {chatMessages.map((msg, index) => (
             <div
               key={index}
               className={`flex gap-3 my-4 text-gray-600 text-sm flex-1 ${
-                msg.user ? "justify-end" : "justify-start"
-              }`}
-            >
+                msg.user ? 'justify-end' : 'justify-start'
+              }`}>
               {!msg.user && (
                 <span className="relative flex shrink-0 overflow-hidden rounded-full w-8 h-8">
                   <div className="rounded-full bg-gray-100 border p-1">
@@ -83,8 +102,7 @@ const Chatbot = () => {
                       aria-hidden="true"
                       height="20"
                       width="20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
+                      xmlns="http://www.w3.org/2000/svg">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -95,12 +113,8 @@ const Chatbot = () => {
                 </span>
               )}
               <p className="leading-relaxed">
-                <span
-                  className={`block font-bold ${
-                    msg.user ? "text-gray-700" : "text-gray-400"
-                  }`}
-                >
-                  {msg.user ? "You" : "AI"}
+                <span className={`block font-bold ${msg.user ? 'text-gray-700' : 'text-gray-400'}`}>
+                  {msg.user ? 'You' : 'AI'}
                 </span>
                 {msg.text}
               </p>
@@ -112,8 +126,7 @@ const Chatbot = () => {
         <div className="flex items-center pt-0">
           <form
             className="flex items-center justify-center w-full space-x-2"
-            onSubmit={handleSubmit}
-          >
+            onSubmit={handleSubmit}>
             <input
               className="flex h-10 w-full rounded-md border border-[#e5e7eb] px-3 py-2 text-sm placeholder-[#6b7280] focus:outline-none focus:ring-2 focus:ring-[#9ca3af] disabled:cursor-not-allowed disabled:opacity-50 text-[#030712] focus-visible:ring-offset-2"
               placeholder="Type your message"
@@ -122,8 +135,7 @@ const Chatbot = () => {
             />
             <button
               className="inline-flex items-center justify-center rounded-md text-sm font-medium text-[#f9fafb] disabled:pointer-events-none disabled:opacity-50 bg-black hover:bg-[#111827E6] h-10 px-4 py-2"
-              type="submit"
-            >
+              type="submit">
               Send
             </button>
           </form>
