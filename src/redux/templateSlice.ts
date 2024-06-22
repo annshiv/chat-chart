@@ -14,11 +14,11 @@ export interface IState {
 }
 
 // Define your initial state
-const initialState: IState = {
+export const initialState: IState = {
   template: ETemplateId.LINE,
-  ranking: { type: 'top', count: 2 },
+  ranking: { type: 'off', count: 0 },
   sorting: {
-    type: 'ascending'
+    type: 'descending'
   }
 };
 
@@ -46,7 +46,7 @@ const templateSlice = createSlice({
 const { actions, reducer } = templateSlice;
 
 // Export the actions
-export const { setTemplate, setRanking, setSorting } = actions;
+export const { setTemplate, setRanking, setSorting, setConfig } = actions;
 
 // Export the reducer as default
 export default reducer;

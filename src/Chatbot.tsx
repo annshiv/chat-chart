@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import './App.css';
+import { ETemplateId, initialState, setConfig, setTemplate } from './redux/templateSlice';
 import axios from 'axios';
 import store from './redux/store';
 
@@ -14,10 +16,10 @@ interface IChatBot {
 }
 
 interface IResponse {
- data: {
-  config: string
- }
- status: number
+  data: {
+    config: string;
+  };
+  status: number;
 }
 
 const initialChatMessage = [{ user: false, text: 'Hi, how can I help you today?' }];
@@ -30,6 +32,7 @@ const Chatbot = (props: IChatBot) => {
   const [selectedIcon, setSelectedIcon] = useState('bar');
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
@@ -40,21 +43,19 @@ const Chatbot = (props: IChatBot) => {
     const newUserMessage: Message = { user: true, text: message };
     const aiResponse: Message = { user: false, text: "I don't know" };
 
-    
-
     const payload = {
       type: showChart ? 'update' : 'create',
       config: store.getState(),
       prompt: chatMessages
     };
 
-    const res = await axios.post('http://localhost:8080/get-config', payload) as IResponse
-    console.log('the res is here',res)
-    const parsedResponse = JSON.parse(res.data.config)
-    console.log('parsed response', parsedResponse)
-    if(res.status === 200){
+    const res = (await axios.post('http://localhost:8080/get-config', payload)) as IResponse;
+    console.log('the res is here', res);
+    const parsedResponse = JSON.parse(res.data.config);
+    console.log('parsed response', parsedResponse);
+    if (res.status === 200) {
       setChatMessages([...chatMessages, newUserMessage, aiResponse]);
-    setMessage('');
+      setMessage('');
       if (!firstMessageSent) {
         setShowChart(true);
         setFirstMessageSent(true);
@@ -62,10 +63,16 @@ const Chatbot = (props: IChatBot) => {
     }
   };
 
+  const onChartUpdate = (value: ETemplateId) => {
+    setSelectedIcon(value);
+    dispatch(setTemplate({ template: value }));
+  };
+
   const onReset = () => {
     console.log('hitting');
     setChatMessages(initialChatMessage);
     setMessage('');
+    dispatch(setConfig(initialState));
   };
 
   useEffect(() => {
@@ -90,8 +97,8 @@ const Chatbot = (props: IChatBot) => {
           <div className="icons flex space-x-2" style={{ width: showChart ? '50%' : '30%' }}>
             <div className="icon-chart">
               <div
-                className={`icon ${selectedIcon === 'bar' ? 'selected' : ''}`}
-                onClick={() => setSelectedIcon('bar')}>
+                className={`icon ${selectedIcon === ETemplateId.BAR ? 'selected' : ''}`}
+                onClick={() => onChartUpdate(ETemplateId.BAR)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                   <path
                     fill="currentColor"
@@ -101,7 +108,7 @@ const Chatbot = (props: IChatBot) => {
               </div>
               <div
                 className={`icon ${selectedIcon === 'line' ? 'selected' : ''}`}
-                onClick={() => setSelectedIcon('line')}>
+                onClick={() => onChartUpdate(ETemplateId.LINE)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                   <g
                     fill="none"

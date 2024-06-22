@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import templateReducer from './templateSlice';
+import previewDataReducer from './previewDataSlice';
 
 const store = configureStore({
   reducer: {
+    previewData: previewDataReducer,
     config: templateReducer
   }
 });
