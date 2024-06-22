@@ -13,8 +13,6 @@ interface IChatBot {
 
 const initialChatMessage = [{ user: false, text: 'Hi, how can I help you today?' }];
 
-
-
 const Chatbot = (props: IChatBot) => {
   const { showChart, setShowChart } = props;
   const [message, setMessage] = useState('');
@@ -35,16 +33,16 @@ const Chatbot = (props: IChatBot) => {
     setChatMessages([...chatMessages, newUserMessage, aiResponse]);
     setMessage('');
 
-    const onReset = () => {
-      console.log('hitting');
-      setChatMessages(initialChatMessage);
-      setMessage('');
-    };
-
     if (!firstMessageSent) {
       setShowChart(true);
       setFirstMessageSent(true);
     }
+  };
+
+  const onReset = () => {
+    console.log('hitting');
+    setChatMessages(initialChatMessage);
+    setMessage('');
   };
 
   useEffect(() => {
@@ -55,16 +53,18 @@ const Chatbot = (props: IChatBot) => {
 
   return (
     <div className="chatbot">
-      <div className="chatbot-box" style={{ width: showChart ? '100%' : '550px', maxWidth:  showChart ? '350px' : "550px", height: showChart ? '85%' : "25%" }}>
+      <div
+        className="chatbot-box"
+        style={{
+          width: showChart ? '100%' : '550px',
+          maxWidth: showChart ? '350px' : '550px',
+          height: showChart ? '85%' : '25%'
+        }}>
         {/* Heading */}
         <div className="flex flex-col space-y-1.5 pb-6">
           <h2 className="font-semibold text-lg tracking-tight">Chatbot</h2>
           <button onClick={() => onReset()}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 21 21">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 21 21">
               <g
                 fill="none"
                 fillRule="evenodd"
@@ -82,7 +82,7 @@ const Chatbot = (props: IChatBot) => {
         <div
           className="message-div pr-4 h-[474px] overflow-y-scroll"
           ref={chatContainerRef}
-          style={{ minWidth: '100%', height: showChart ? '520px': '10px' }}>
+          style={{ minWidth: '100%', height: showChart ? '520px' : '10px' }}>
           {chatMessages.map(
             (msg, index) =>
               msg.text !== '' && (

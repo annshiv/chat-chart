@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Chatbot from './Chatbot';
 import './index.css';
+import ChartRenderer from './ChartRenderer';
 
 const App: React.FC = () => {
   const [showChart, setShowChart] = useState(false);
@@ -11,18 +12,21 @@ const App: React.FC = () => {
     alignItems: 'center',
     height: '90vh',
     width: '85vw',
-    margin: 'auto', 
+    margin: 'auto'
   };
 
   const chatbotContainerStyle = {
-    marginLeft: showChart ? 'auto' : '0px',
+    marginLeft: showChart ? 'auto' : '0px'
   };
 
   return (
     <div className="component" style={showChart ? {} : containerStyle}>
       {showChart && (
         <div className="box">
-          <h1>Chatbot-Chart</h1>
+          <div className="chart-holder">
+            <h1 className="chart-name"> Chartbot-Chart</h1>
+            <ChartRenderer />
+          </div>
         </div>
       )}
       <div className="chatbot-container" style={chatbotContainerStyle}>
