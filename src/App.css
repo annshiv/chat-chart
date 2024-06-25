@@ -94,6 +94,7 @@ body {
   height: 94%;
   margin: 2%;
   background-color: white;
+  justify-content: center;
 }
 
 .side-panel {
@@ -115,8 +116,8 @@ body {
   width: 95%;
   margin-top: 20%;
   margin-left: 2.5%;
-  border-color: #e5e7eb;
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  /* border-color: #e5e7eb; */
+  /* box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); */
 }
 
 p {

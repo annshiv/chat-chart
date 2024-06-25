@@ -3,8 +3,8 @@ import { IRanking } from '../Services/Ranking';
 import { ISorting } from '../Services/Sorting';
 
 export enum ETemplateId {
-  BAR = 'BAR',
-  LINE = 'LINE'
+  BAR = 'bar',
+  LINE = 'line'
 }
 
 export interface IState {
@@ -18,17 +18,17 @@ export const initialState: IState = {
   template: ETemplateId.LINE,
   ranking: { type: 'off', count: 0 },
   sorting: {
-    type: 'descending'
+    type: 'off'
   }
 };
 
 // Create a slice
 const templateSlice = createSlice({
-  name: 'template',
+  name: 'config',
   initialState,
   reducers: {
-    setConfig(state, action: PayloadAction<IState>) {
-      state = action.payload;
+    setConfig(state, action: PayloadAction<{ config: IState }>) {
+      state = action.payload.config;
     },
     setTemplate(state, action: PayloadAction<{ template: ETemplateId }>) {
       state.template = action.payload.template;

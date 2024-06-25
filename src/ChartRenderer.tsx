@@ -18,16 +18,21 @@ const getData = (config?: IState) => {
   }
   return data;
 };
+interface IProps2 {
+  config: IState
+}
 
-const ChartRenderer: React.FC = () => {
-  const { template } = store.getState().config;
+const ChartRenderer: React.FC<IProps2> = (props:IProps2 ) => {
+  const { config} = props
+  const { template } = config as IState
   let chart = null;
+
   switch (template) {
     case ETemplateId.BAR:
-      chart = <BarChart data={getData()} />;
+      chart = <BarChart data={getData(config)} />;
       break;
     case ETemplateId.LINE:
-      chart = <LineChart data={getData()} />;
+      chart = <LineChart data={getData(config)} />;
       break;
     default:
       null;
@@ -39,4 +44,9 @@ const ChartRenderer: React.FC = () => {
     </div>
   );
 };
-export default ChartRenderer;
+// const mapState = (state: RootState) =>({
+//   config: state.config
+// })
+// type TMapState = Partial<ReturnType<typeof mapState>>
+
+export default ChartRenderer

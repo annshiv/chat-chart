@@ -6,9 +6,11 @@ import './index.css';
 import { connect } from 'react-redux';
 import { RootState } from './redux/store';
 import ChartPreviewRenderer from './ChartPreviewRenderer';
+import { initialState } from './redux/templateSlice';
 
 const App: React.FC = () => {
   const [showChart, setShowChart] = useState(false);
+  const [config, setConfig] = useState(initialState)
 
   const containerStyle = {
     display: 'flex',
@@ -34,13 +36,13 @@ const App: React.FC = () => {
         <div className="box">
           <div className="chart-holder">
             <h1 className="chart-name"> Chartbot-Chart</h1>
-            <ChartRenderer />
+            <ChartRenderer config={config}/>
           </div>
           <ChartPreviewRenderer/>
         </div>
       )}
       <div className="chatbot-container" style={chatbotContainerStyle}>
-        <Chatbot showChart={showChart} setShowChart={setShowChart} />
+        <Chatbot showChart={showChart} setShowChart={setShowChart} config={config} setConfig={setConfig} />
       </div>
     </div>
   );

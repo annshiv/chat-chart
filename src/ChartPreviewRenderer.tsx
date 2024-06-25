@@ -22,8 +22,8 @@ const getData = (config?: IState) => {
 
 const ChartPreviewRenderer: React.FC = (props:TMapState ) => {
   const { previewData }= props
-  if(!previewData) return null
-  const { template } = previewData
+  if(!Object.keys((previewData as object)  ).length) return null
+  const { template } = previewData as IState
 
   let chart = null;
   switch (template) {

@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { initialState, IState } from './templateSlice';
+import { IState } from './templateSlice';
 
 // Create a slice
 const previewDataSlice = createSlice({
   name: 'previewData',
-  initialState,
+  initialState: {} as IState,
   reducers: {
     setPreviewDataConfig(state, action: PayloadAction<IState>) {
       state = action.payload;
