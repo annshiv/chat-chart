@@ -1,4 +1,4 @@
-import { IDataFormat } from '../Utils/constant';
+import { IDataFormat } from '../utils/constant';
 
 export interface IRanking {
   type: 'top' | 'bottom' | 'off';

@@ -1,4 +1,4 @@
-import { IDataFormat } from '../Utils/constant';
+import { IDataFormat } from '../utils/constant';
 
 type TSortType = 'ascending' | 'descending' | 'off';
 export interface ISorting {
