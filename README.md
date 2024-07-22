@@ -1,46 +1,45 @@
-# Getting Started with Create React App
+# Chat-Chart
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Summary
 
-## Available Scripts
+**Team Members:**
+- Akileshwari
+- Annamalai
+- Delhi Babu
+- Sesslyn
+- Saranya
 
-In the project directory, you can run:
+## Problem Statement
 
-### `npm start`
+Creating interactive dashboards and data visualizations can be complex and time-consuming, especially for users without technical expertise in data analytics or coding. Many existing tools have a steep learning curve, which can lead to underutilization of valuable data insights and create barriers to informed decision-making.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Demo
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+https://github.com/user-attachments/assets/b065f6d7-df75-45e6-b812-933b115b8d2f
 
-### `npm test`
+## Project Overview
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Chat-Chart** is designed to simplify the creation of interactive dashboards for users of all skill levels. By leveraging artificial intelligence, this project offers a user-friendly chatbot interface to streamline the data visualization process.
 
-### `npm run build`
+## Key Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Intuitive Chatbot Interface:** A chatbot that processes simple commands from users, making it easy for new users to get started with minimal learning.
+2. **Automated JSON Configuration:** Automatically generates JSON configurations for chart parameters based on user input, eliminating the need for prior knowledge of JSON or coding.
+3. **Real-Time Chart Preview:** Provides a preview of charts within the chatbot interface before finalizing configurations, allowing for immediate feedback and adjustments.
+4. **Seamless Dashboard Integration:** Integrates finalized chart configurations into the user’s dashboard effortlessly, transforming raw data into insightful visualizations.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How It Works
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **User Interaction:** Users interact with the chatbot, providing commands and data inputs in natural language.
+2. **Command Interpretation:** The chatbot translates these commands into JSON configurations that define the chart display.
+3. **Preview and Adjustments:** Users preview and adjust the generated charts within the chatbot interface before finalizing the configuration.
+4. **Dashboard Integration:** Finalized chart configurations are applied to the user’s dashboard, creating interactive and insightful visualizations.
 
-### `npm run eject`
+## Project Repository
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+For more details and to access the source code, please visit:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [Front-end: Chat-Chart Repository](https://github.com/annshiv/chat-chart.git)
+- [Backend Code: Chat-Chart Backend](https://github.com/annshiv/chat-chart-backend.git)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Chat-Chart** aims to make data visualization accessible and straightforward, enabling users to transform data into meaningful insights with ease.
