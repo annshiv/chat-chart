@@ -3,11 +3,11 @@
 ## Project Summary
 
 **Team Members:**
-- Akileshwari
-- Annamalai
-- Delhi Babu
-- Sesslyn
-- Saranya
+- [Akileshwari](https://github.com/akileswari)
+- [Annamalai](https://github.com/annshiv)
+- [Delhi Babu](https://github.com/Delhi-Babu)
+- [Sesslyn](https://github.com/Sesslyn041215)
+- [Saranya](https://github.com/Saranya-Ramesh-27)
 
 ## Problem Statement
 
