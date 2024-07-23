@@ -1,7 +1,7 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import React from 'react';
-import { getDataObj, IDataFormat } from '../Utils/constant';
+import { getDataObj, IDataFormat } from '../utils/constant';
 export interface IProps {
   data: IDataFormat[];
 }
